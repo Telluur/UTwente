@@ -3,8 +3,6 @@ package ss.week2.hotel;
 import java.util.ArrayList;
 import java.util.List;
 
-import ss.week3.pw.Password;
-
 public class Hotel {
 	Password password;
 	String hotelName;

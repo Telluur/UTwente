@@ -1,8 +1,8 @@
 package ss.week3.hotel;
 
+import ss.week2.hotel.Password;
 import ss.week2.hotel.Room;
 import ss.week3.hotel.Bill.Item;
-import ss.week3.pw.Password;
 
 public class PricedRoom extends Room implements Item{
 	private int price;

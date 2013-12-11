@@ -1,6 +1,5 @@
 package ss.week2.hotel;
 
-import ss.week3.pw.Password;
 
 /**
  * Hotel room with number and possibly a guest.
