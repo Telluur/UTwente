@@ -10,7 +10,7 @@ public class Bill {
 		public double getAmount();
 	}
 
-	private double totalcost = 0.0;
+	private double totalcost = 0;
 	private PrintStream out;
 
 	public Bill(PrintStream theOutStream) {
@@ -33,5 +33,4 @@ public class Bill {
 		out.println(Format.printLine(item.toString(), item.getAmount()));
 		totalcost = totalcost + item.getAmount();
 	}
-
 }
