@@ -15,7 +15,7 @@ public class Bill {
 
 	public Bill(PrintStream theOutStream) {
 		if (theOutStream != null) {
-			theOutStream.println();
+			out = theOutStream;
 		}
 	}
 
