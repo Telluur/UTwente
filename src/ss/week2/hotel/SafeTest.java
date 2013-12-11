@@ -1,5 +1,7 @@
 package ss.week2.hotel;
 
+import ss.week3.pw.Password;
+
 public class SafeTest {
 	public static void main (String[] args){
 		new SafeTest().run();

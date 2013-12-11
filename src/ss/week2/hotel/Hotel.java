@@ -3,6 +3,8 @@ package ss.week2.hotel;
 import java.util.ArrayList;
 import java.util.List;
 
+import ss.week3.pw.Password;
+
 public class Hotel {
 	Password password;
 	String hotelName;
@@ -12,8 +14,8 @@ public class Hotel {
 	public Hotel(String hotelName) {
 		this.hotelName = hotelName;
 		password = new Password();
-		rooms.add(new Room(101));
-		rooms.add(new Room(102));
+		rooms.add(new Room(101, new Safe(new Password())));
+		rooms.add(new Room(102, new Safe(new Password())));
 	}
 
 	public Room checkIn(String passwordString, String guestName) {

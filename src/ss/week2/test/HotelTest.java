@@ -2,7 +2,7 @@ package ss.week2.test;
 
 import ss.week2.hotel.Guest;
 import ss.week2.hotel.Hotel;
-import ss.week2.hotel.Password;
+import ss.week3.pw.Password;
 import ss.week2.hotel.Room;
 import ss.week2.hotel.Safe;
 
