@@ -9,6 +9,7 @@ public class Hotel {
 
 	List<Room> rooms = new ArrayList<Room>();
 
+	//TODO JML
 	public Hotel(String hotelName) {
 		this.hotelName = hotelName;
 		password = new Password();
@@ -25,6 +26,8 @@ public class Hotel {
 		return null;
 	}
 
+	
+	
 	public boolean checkOut(String guestName) {
 		Room guestRoom = getRoom(guestName);
 		if(guestRoom != null){
@@ -35,6 +38,7 @@ public class Hotel {
 		return false;
 	}
 
+	// @ ensures emptyRoom != null;
 	public Room getFreeRoom() {
 		Room emptyRoom = null;
 		for (Room room : rooms) {
@@ -45,7 +49,8 @@ public class Hotel {
 		}
 		return emptyRoom;
 	}
-
+	
+	// @ ensures guestRoom != null;
 	public Room getRoom(String guestName) {
 		Room guestRoom = null;
 		for (Room room : rooms) {

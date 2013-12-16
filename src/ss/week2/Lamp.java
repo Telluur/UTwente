@@ -1,12 +1,21 @@
 package ss.week2;
 
 public class Lamp {
+	//TODO JML
+	
+	// @ public invariant lampState != null;
+	
 	LampState lampState;
 	
 	public Lamp(LampState lampState) {
 		this.lampState = lampState;
 	}
 
+	// @ requires lampState != null;
+	// @ ensures \old(getLampState() == LampState.HIGH) ==> getLampState() == LampState.OFF;
+	// @ ensures \old(getLampState() == LampState.MEDIUM) ==> getLampState() == LampState.HIGH;
+	// @ ensures \old(getLampState() == LampState.HIGH) ==> getLampState() == LampState.OFF;
+	// @ ensures \old(getLampState() == LampState.HIGH) ==> getLampState() == LampState.OFF;
 	public void addlampState() {
 		switch(lampState){
 		case HIGH:
@@ -25,7 +34,7 @@ public class Lamp {
 			break;
 		}
 	}
-
+	
 	public void setlampState(LampState lampState) {
 		this.lampState = lampState;
 	}

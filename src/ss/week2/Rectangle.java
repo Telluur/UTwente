@@ -3,33 +3,32 @@ package ss.week2;
 public class Rectangle {
 	
 	//@ requires width > 1;
-	//@ requires lenght > 1;
-	Rectangle(int lenght, int width) {
-		this.lenght = lenght;
+	//@ requires length > 1;
+	public Rectangle(int length, int width) {
+		this.length = length;
 		this.width = width;
 	}
 	
-	private int lenght;
+	private int length;
 	private int width;
 
 
-	int lenght() {
-		return lenght;
+	public int getLength() {
+		return length;
 	}
 
 	
-	int width() {
+	public int getWidth() {
 		return width;
 	}
 
 	//@ ensures \result > 1;
-	int area() {
-		return lenght * width;
+	public int area() {
+		return length * width;
 	}
 
 	//@ ensures \result > 1;
-	int perimeter() {
-		int perimeter = 2 * lenght + 2 * width;
-		return perimeter;
+	public int perimeter() {
+		return 2 * length + 2 * width;
 	}
 }
