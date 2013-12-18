@@ -1,4 +1,4 @@
-package ss.week4.excercises;
+package ss.week4;
 
 public class IntNegative {
 
