@@ -1,7 +1,7 @@
 package ss.week4.math;
 
 public interface Function {
-	public int apply();
-	public Object derivative();
+	public int apply(int x);
+	public Function[] derivative();
 	public String toString();
 }

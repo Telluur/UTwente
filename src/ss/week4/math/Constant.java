@@ -8,12 +8,12 @@ public class Constant implements Function {
 		this.number = number;
 	}
 
-	public int apply() {
-		return number;
+	public int apply(int x) {
+		return number * x;
 	}
 
-	public Object derivative() {
-		return 0;
+	public Function[] derivative() {
+		return new Function[]{new Constant(0)};
 	}
 	
 	public String toString(){

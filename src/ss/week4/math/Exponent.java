@@ -2,17 +2,21 @@ package ss.week4.math;
 
 public class Exponent implements Function {
 
-	private int number;
+	private int exponent;
 
-	public Exponent(int number) {
-		this.number = number;
+	public Exponent(int exponent) {
+		this.exponent = exponent;
 	}
 
-	public int apply() {
-		return number;
+	public int apply(int x) {
+		return x ^ exponent;
 	}
 
-	public Object derivative() {
-
+	public Function[] derivative() {
+		return new Function[]{new Constant(exponent), new Exponent(exponent - 1)};
+	}
+	
+	public String toString(){
+		return "f(x) = x^" + exponent;
 	}
 }

@@ -1,4 +1,4 @@
-package ss.week6;
+package ss.week5;
 
 public interface Compare {
 
