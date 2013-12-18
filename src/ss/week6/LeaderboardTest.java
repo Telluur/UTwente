@@ -15,7 +15,7 @@ public class LeaderboardTest {
 	
 	public void run(){
 		setup();
-		testAverage();
+		testTeamScore();
 	}
 	
 	public void testTop(){
@@ -32,6 +32,10 @@ public class LeaderboardTest {
 	
 	public void testAverage(){
 		System.out.println(leaderboard.averageScore());
+	}
+	
+	public void testTeamScore(){
+		System.out.println(leaderboard.getHighestScore("c"));
 	}
 	
 	private void setup(){

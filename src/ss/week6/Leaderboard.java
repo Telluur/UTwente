@@ -94,4 +94,44 @@ public class Leaderboard {
 		}
 		return totalScore / addedScores;
 	}
+	
+	/**
+	 * Gets the highest score a team ever got
+	 * @param team The team name
+	 * @return score The score
+	 */
+	public int getHighestScore(String team){
+		List<Score> teamScores = getTeamScores(team);
+		if(!teamScores.isEmpty()){
+			Collections.sort(teamScores);
+			return teamScores.get(0).getPoints();
+		} else {
+			return 0;
+		}
+	}
+	
+	/**
+	 * Gets the date on which a team got their highest score
+	 * @param team The team name
+	 * @return date The date
+	 */
+	public Date getBestDay(String team){
+		List<Score> teamScores = getTeamScores(team);
+		if(!teamScores.isEmpty()){
+			Collections.sort(teamScores);
+			return teamScores.get(0).getTime();
+		} else {
+			return null;
+		}
+	}
+	
+	private List<Score> getTeamScores(String team){
+		List<Score> teamScores = new ArrayList<Score>();
+		for(Score score : scores){
+			if(score.getTeam().equals(team)){
+				teamScores.add(score);
+			}
+		}
+		return teamScores;
+	}
 }
