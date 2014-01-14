@@ -1,0 +1,10 @@
+In contrast to writing to PrintWriter, when reading from a BufferedReader you have to take exceptions
+into account.
+1. What would be the reason for this difference?
+An exception will be thrown when you try to read something that isn't there, eg; end of file.
+
+2. For a PrintWriter, how can you check whether output has succeeded?
+Check if data has appeared in your destination.
+
+3. How can you construct a BufferedReader based on standard input?
+new BufferedReader (new InputStreamReader (System.in));

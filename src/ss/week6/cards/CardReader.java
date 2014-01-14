@@ -25,11 +25,9 @@ public class CardReader {
 	private static ObjectInputStream objectIn;
 	private static ObjectOutputStream objectOut;
 
-	private static Card read() throws EOFException {
+	private static Card read() throws IOException {
 		if (reader != null) {
 			return Card.read(reader);
-		} else if (dataIn != null) {
-			return Card.read(dataIn);
 		} else {
 			return Card.read(objectIn);
 		}
@@ -38,8 +36,6 @@ public class CardReader {
 	private static void write(Card k) throws IOException {
 		if (writer != null) {
 			k.write(writer);
-		} else if (dataOut != null) {
-			k.write(dataOut);
 		} else {
 			k.write(objectOut);
 		}
@@ -70,8 +66,7 @@ public class CardReader {
 
 	public static void main(String[] args) {
 		if (args.length != 2) {
-			System.err.println("Usage: java CardReader "
-					+ "[<filename>|-] [<filename>|-]");
+			System.err.println("Usage: java CardReader " + "[<filename>|-] [<filename>|-]");
 			return;
 		}
 
@@ -97,12 +92,11 @@ public class CardReader {
 				writer = new PrintWriter(System.out);
 			} else if (args[1].endsWith(".txt")) {
 				writer = new PrintWriter(new FileWriter(args[1]));
-		    } else if (args[1].endsWith(".dat")) {
+			} else if (args[1].endsWith(".dat")) {
 				dataOut = new DataOutputStream(new FileOutputStream(args[1]));
-		    } else if (args[1].endsWith(".obj")) {
-				objectOut = new ObjectOutputStream(
-						new FileOutputStream(args[1]));
-		    } else {
+			} else if (args[1].endsWith(".obj")) {
+				objectOut = new ObjectOutputStream(new FileOutputStream(args[1]));
+			} else {
 				System.err.println("Format " + args[0] + " not recognised");
 				return;
 			}

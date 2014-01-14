@@ -1,0 +1,17 @@
+1. How can you construct a PrintWriter or BufferedReader object that corresponds to a ﬁle on your
+computer?
+File file = new File("C:/file.txt");
+PrintWriter printWriter = new PrintWriter(file);
+FileReader fileReader = new FileReader("C:/file.txt");
+BufferedReader bufferedReader = new BufferedReader(fileReader);
+
+2. What does it mean to ﬂush a Writer (see Writer.flush())?
+from docs:
+Flushes this stream by writing any buffered output to the underlying stream.
+
+3. How can you make sure that after every call to println a PrintWriter is automatically ﬂushed?
+Construct PrintWriter using:
+PrintWriter(OutputStream out, boolean autoFlush);
+eg;
+new PrintWriter(new FileOutputStream(new File("parent","child")), true)
+FileOutputStream is a direct subclass of OutputStream.
