@@ -8,15 +8,18 @@ public class Constant implements Function {
 		this.number = number;
 	}
 
+    @Override
 	public int apply(int x) {
-		return number * x;
+		return number;
 	}
 
-	public Function[] derivative() {
-		return new Function[]{new Constant(0)};
+    @Override
+    public Function derivative() {
+		return new Constant(0);
 	}
-	
-	public String toString(){
-		return "f(x) = c = " + number;
+
+    @Override
+    public String toString(){
+		return Integer.toString(number);
 	}
 }

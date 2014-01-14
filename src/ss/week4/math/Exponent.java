@@ -8,15 +8,18 @@ public class Exponent implements Function {
 		this.exponent = exponent;
 	}
 
-	public int apply(int x) {
-		return x ^ exponent;
+    @Override
+    public int apply(int x) {
+		return (int) Math.pow(x, exponent);
 	}
 
-	public Function[] derivative() {
-		return new Function[]{new Constant(exponent), new Exponent(exponent - 1)};
+    @Override
+    public Function derivative() {
+		return new LinearProduct(exponent, new Exponent(exponent - 1));
 	}
-	
-	public String toString(){
-		return "f(x) = x^" + exponent;
+
+    @Override
+    public String toString(){
+		return "x^" + exponent;
 	}
 }
