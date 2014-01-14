@@ -1,12 +1,10 @@
 package ss.week5.Strategy;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class PerfectStrategy implements Strategy {
 
-    private int bestMove;
-    private Quality bestQuality;
+    private static final int losing = 0;
+    private static final int neutral = 1;
+    private static final int winning = 2;
 
     @Override
     public String getName() {
@@ -15,76 +13,43 @@ public class PerfectStrategy implements Strategy {
 
     @Override
     public int determineMove(Board board, Mark mark) {
-        bestMove = -1;
-        bestQuality = Quality.LOSE;
-
-        for (int field : getAvailableFields(board)) {
-            Board copyBoard = board.deepCopy();
-            copyBoard.setField(field, mark);
-            getBestMove(true, field, copyBoard, mark);
-        }
-        return bestMove;
+        return bestMove(board , mark, true)[0];
     }
 
-    private void getBestMove(boolean player, int move, Board board, Mark mark) {
-        //System.out.println("Best move so far: " + bestMove + ", with quality " + bestQuality.name());
-        //Set default quality to lose so it won't be better.
-        Quality quality = Quality.LOSE;
-        //If board has a winner...
-        if (board.hasWinner()) {
-            //..and last move was made by player, set quality to win.
-            if (player) {
-                quality = Quality.WIN;
-            }
-            // If no moves are remaining, set quality to neutral.
-        } else if (getAvailableFields(board).isEmpty()) {
-            quality = Quality.NEUTRAL;
-        } else {
-            for (int field : getAvailableFields(board)) {
-                Board copyBoard = board.deepCopy();
-                copyBoard.setField(field, mark);
-                getBestMove(!player, move, copyBoard, mark.other());
+    private int[] bestMove(Board b, Mark m, boolean player) {
+        int bestQual = -1;
+        int bestMove = -1;
+
+        for (int move = 0; move < 9; move++) {
+            if (b.isEmptyField(move)) {
+                int qual = -1;
+
+                Board copy = b.deepCopy();
+                copy.setField(move, m);
+
+                if(copy.isWinner(m)){
+                    qual = winning;
+                } else if (copy.isWinner(m.other())){
+                    qual = losing;
+                } else {
+                    int oppQual = bestMove(copy, m.other(), !player)[1];
+
+                    if (oppQual == winning) {
+                        qual = losing;
+                    } else if (oppQual == losing) {
+                        qual = winning;
+                    } else {
+                        qual = neutral;
+                    }
+                }
+
+                if (qual >= bestQual) {
+                    bestQual = qual;
+                    bestMove = move;
+                }
             }
         }
 
-        //Check if quality is better than bestQuality
-        if (isBetterQuality(bestQuality, quality)) {
-            // If it is, replace bestQuality & bestMove
-            bestQuality = quality;
-            bestMove = move;
-            System.out.println("Set quality to " + quality + " at move " + move);
-        }
-    }
-
-    private boolean isBetterQuality(Quality oldQuality, Quality newQuality) {
-        if (oldQuality == Quality.WIN) {
-            return false;
-        } else if (oldQuality == Quality.NEUTRAL) {
-            if (newQuality == Quality.WIN) {
-                return true;
-            } else {
-                return false;
-            }
-        } else {
-            if (newQuality == Quality.WIN || newQuality == Quality.NEUTRAL) {
-                return true;
-            } else {
-                return false;
-            }
-        }
-    }
-
-    private List<Integer> getAvailableFields(Board board) {
-        List<Integer> availableFields = new ArrayList<>();
-        for (int i = 0; i <= 8; i++) {
-            if (board.isEmptyField(i)) {
-                availableFields.add(i);
-            }
-        }
-        return availableFields;
-    }
-
-    public enum Quality {
-        LOSE, NEUTRAL, WIN
+        return new int[]{bestMove, bestQual};
     }
 }
