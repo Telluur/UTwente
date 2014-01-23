@@ -45,7 +45,7 @@ public class Client {
 
 		// try to open a Socket to the server
 		try {
-			sock = new Socket(addr, port);
+            sock = new Socket("localhost", 2010);
 		} catch (IOException e) {
 			System.out.println("ERROR: could not create a socket on " + addr
 					+ " and port " + port);
@@ -57,10 +57,8 @@ public class Client {
 			Thread streamInputHandler = new Thread(client);
 			streamInputHandler.start();
 			client.handleTerminalInput();
-			client.shutDown();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
-
-} // end of class Client
+}
