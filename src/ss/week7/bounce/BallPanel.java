@@ -18,6 +18,7 @@ public class BallPanel extends JPanel implements ActionListener {
 
 	public BallPanel() {
 		balls = new java.util.ArrayList<Ball>();
+		new AnimateThread().start();
 	}
 
 	/**
@@ -79,6 +80,12 @@ public class BallPanel extends JPanel implements ActionListener {
 		super.paintComponent(g);
 		for (Ball b : balls) {
 			b.draw(g);
+		}
+	}
+	
+	public class AnimateThread extends Thread{
+		public void run(){
+			animate();
 		}
 	}
 }
