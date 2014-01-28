@@ -5,28 +5,23 @@ import com.sun.org.apache.xml.internal.security.exceptions.Base64DecodingExcepti
 import com.sun.org.apache.xml.internal.security.utils.Base64;
 
 
+import javax.xml.bind.DatatypeConverter;
+import java.math.BigInteger;
 import java.security.*;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
 
-public class Crypto extends PKITest {
+public class Crypto {
 
 
-    public static byte[] decodeBase64(String message) {
-        byte[] bytes = null;
-        try {
-            bytes = Base64.decode(message);
-        } catch (Base64DecodingException e) {
-            e.printStackTrace();
-        }
-        return bytes;
-    }
 
-    public static String encodeBase64(byte[] bytes) {
-        return Base64.encode(bytes);
-    }
 
+    /**
+     * Generates a PrivateKey Object out of raw byte[] material.
+     * @param rawKey byte array containing the privatekey.
+     * @return PrivateKey object
+     */
     public static PrivateKey decodePrivateKey(byte[] rawKey) {
         PKCS8EncodedKeySpec keySpec;
         KeyFactory fact;
@@ -41,6 +36,11 @@ public class Crypto extends PKITest {
         return privateKey;
     }
 
+    /**
+     * Generates a PubliceKey Object out of raw byte[] material.
+     * @param rawKey byte array containing the publickey.
+     * @return PublicKey object
+     */
     public static PublicKey decodePublicKey(byte[] rawKey) {
         X509EncodedKeySpec keySpec;
         KeyFactory fact;
@@ -56,6 +56,12 @@ public class Crypto extends PKITest {
         return publicKey;
     }
 
+    /**
+     * Signs a message with a PrivateKey.
+     * @param message the message to be signed
+     * @param privateKey the Privatekey to be used
+     * @return signature message
+     */
     public static byte[] signMessage(String message, PrivateKey privateKey) {
         Signature sig = null;
         byte[] signature = null;
@@ -70,6 +76,13 @@ public class Crypto extends PKITest {
         return signature;
     }
 
+    /**
+     * Checks if a message encrypts to a pre-defined encrypted message (signature).
+     * @param signature the message signed with a PrivateKey
+     * @param message the message in plain text
+     * @param publicKey the PublicKey to sign the plain text message with
+     * @return true if the message signs to the given signature using the Publickey. returns false otherwise.
+     */
     public static boolean verifyMessage(byte[] signature, String message, PublicKey publicKey) {
         Boolean check = false;
         try {
@@ -83,28 +96,13 @@ public class Crypto extends PKITest {
         return check;
     }
 
-    public static byte[] generateNonce() {
+
+    /**
+     * Generates a SecureRandom String
+     * @return SecureRandom String
+     */
+    public static String generateToken(){
         SecureRandom secureRandom = new SecureRandom();
-        byte[] b1 = new byte[128 / 8];
-        secureRandom.nextBytes(b1);
-        return b1;
-
+        return new BigInteger(200,secureRandom).toString(30);
     }
-
-/*
-    public static void byteTest(byte[] bytes){
-        String string = new String(bytes);
-        byte[] b = string.getBytes();
-        System.out.println(bytes.equals(b));
-    }
-
-    public static void byteTest(){
-        String m1 = "Hello world!";
-        byte[] bytes = m1.getBytes();
-        String m2 = new String(bytes);
-        System.out.println(m2.equals(m1));
-
-    }
-*/
-
 }

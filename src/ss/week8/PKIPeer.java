@@ -27,11 +27,13 @@ public class PKIPeer implements Runnable {
         out = new BufferedWriter(new OutputStreamWriter(this.socket.getOutputStream()));
     }
 
+    int i = 0;
     public void run() {
         while (true) {
             try {
                 String message = in.readLine();
-                System.out.println(message);
+                System.out.println("Received [" + i + "] " + message);
+                i++;
                 handleMessages(message);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -82,13 +84,13 @@ public class PKIPeer implements Runnable {
         switch (scanner.next()) {
             case "PRIVKEY":
                 PrivateKey privateKey = Crypto.decodePrivateKey(Crypto.decodeBase64(scanner.next()));
-                System.out.println(privateKey.toString());
+                //System.out.println(privateKey.toString());
                 base64Message = Crypto.encodeBase64(Crypto.signMessage(plaintextMessage, privateKey));
-               System.out.println(base64Message);
+                System.out.println("base64: " + base64Message);
                 break;
             case "PUBKEY":
                 PublicKey publicKey = Crypto.decodePublicKey(Crypto.decodeBase64(scanner.next()));
-                System.out.println(publicKey.toString());
+                //System.out.println(publicKey.toString());
                 Boolean check = Crypto.verifyMessage(Crypto.decodeBase64(base64Message), plaintextMessage, publicKey);
                 System.out.println(check);
                 break;
