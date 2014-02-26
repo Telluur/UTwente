@@ -1,10 +1,5 @@
 package ss.week8;
 
-
-import com.sun.org.apache.xml.internal.security.exceptions.Base64DecodingException;
-import com.sun.org.apache.xml.internal.security.utils.Base64;
-
-
 import javax.xml.bind.DatatypeConverter;
 import java.math.BigInteger;
 import java.security.*;
@@ -14,6 +9,25 @@ import java.security.spec.X509EncodedKeySpec;
 
 public class Crypto {
 
+    /**
+     * Decodes a base64 string to bytes.
+     *
+     * @param message base64 string in plain text
+     * @return decoded base64 string
+     */
+    public static byte[] decodeBase64(String message) {
+        return DatatypeConverter.parseBase64Binary(message);
+    }
+
+    /**
+     * Encodes a byte array to a base64 string.
+     *
+     * @param bytes byte array to be encoded
+     * @return base64 string
+     */
+    public static String encodeBase64(byte[] bytes) {
+        return DatatypeConverter.printBase64Binary(bytes);
+    }
 
 
 

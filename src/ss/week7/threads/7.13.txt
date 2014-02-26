@@ -1,0 +1,10 @@
+a. extends de funcionaliteit van het synchronized keyword, meer gecontroleert locken. bijv: tryLock() lockInterruptibly(), fairness property en een lijst met wachtende threads.
+b. Though ReentrantLock provides same visibility and orderings guaranteed as implicit lock,
+acquired by synchronized keyword in Java,
+it provides more functionality and differ in certain aspect.
+As stated earlier,  main difference between synchronized and ReentrantLock is ability to trying for lock interruptibly,
+and with timeout. Thread doesn’t need to block infinitely, which was the case with synchronized.
+c. zie a.
+d.
+- Je wordt verplicht te werken met try-finally code blocks. Ze zijn lelijk en maken code onleesbaar.
+- Unlocken ligt impliciet bij programmeur, een unlock vergeten kan fataal zijn voor een programma.

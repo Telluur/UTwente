@@ -4,15 +4,15 @@ package ss.week7.threads;
  * Incorrect communication between IntProducer en IntConsumer.
  */
 public class UnsynchronizedIntCell implements IntCell {
-	private int value = 0;
+    private int value = 0;
 
-	public void setValue(int valueArg) {
-		this.value = valueArg;
-	}
+    public void setValue(int valueArg) {
+        this.value = valueArg;
+    }
 
-	public int getValue() {
-		return value;
-	}
+    public int getValue() {
+        return value;
+    }
 }
 
 /**************************************************************************
