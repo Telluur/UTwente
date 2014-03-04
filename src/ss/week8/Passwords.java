@@ -39,7 +39,7 @@ public class Passwords {
                                 long end = System.currentTimeMillis();
                                 timeAttempt = end - startAttempt;
                                 time = end - start;
-                                System.out.println("Password found: '" + password + "',try took " + timeAttempt + "ms. Total time: " + time);
+                                System.out.println("Password found: '" + password + "',try took " + timeAttempt + "ms. Total time: " + time + "ms.");
                                 break bruteForce;
                             } else {
                                 timeAttempt = System.currentTimeMillis() - startAttempt;
